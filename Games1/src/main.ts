@@ -7,7 +7,7 @@ import {MenuScene} from "./scenes/MenuScene.js";
 import {SplashScene} from "./scenes/SplashScene.js";
 
 /**
- * Configuration of the game
+ * Configuration of the game.
  */
 const config = {
     type: Phaser.AUTO,

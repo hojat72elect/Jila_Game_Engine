@@ -1,5 +1,6 @@
-// Class to preload all the assets
-// Remember you can load this assets in another scene if you need it
+/**
+ * This class is for preloading all the game assets. You can also load these assets in another scene if you need.
+ */
 export class Preloader extends Phaser.Scene {
     constructor() {
         super({key: "Preloader"});
@@ -30,20 +31,24 @@ export class Preloader extends Phaser.Scene {
         this.load.image("knighthawks", "fonts/knight3.png");
 
         // Event to update the loading bar
-        this.load.on("progress", (progress) => {
+        this.load.on("progress", (progress: number) => {
             console.log("Loading: " + Math.round(progress * 100) + "%");
         });
     }
 
     create() {
         // Create bitmap font and load it in cache
-        const config = {
+        const config: Phaser.Types.GameObjects.BitmapText.RetroFontConfig = {
+            "offset.x": 0,
+            "offset.y": 0,
+            "spacing.x": 0,
+            "spacing.y": 0,
             image: 'knighthawks',
             width: 31,
             height: 25,
             chars: Phaser.GameObjects.RetroFont.TEXT_SET6,
             charsPerRow: 10,
-            spacing: {x: 1, y: 1}
+            lineSpacing: 0
         };
         this.cache.bitmapFont.add('knighthawks', Phaser.GameObjects.RetroFont.Parse(this, config));
 
