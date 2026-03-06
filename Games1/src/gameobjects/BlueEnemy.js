@@ -1,5 +1,5 @@
-import { Physics, Math } from "phaser";
-import { Bullet } from "./Bullet";
+import {Math, Physics} from "phaser";
+import {Bullet} from "./Bullet";
 
 export class BlueEnemy extends Physics.Arcade.Sprite {
     scene = null;

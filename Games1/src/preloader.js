@@ -2,7 +2,7 @@
 // Remember you can load this assets in another scene if you need it
 export class Preloader extends Phaser.Scene {
     constructor() {
-        super({ key: "Preloader" });
+        super({key: "Preloader"});
     }
 
     preload() {
@@ -43,7 +43,7 @@ export class Preloader extends Phaser.Scene {
             height: 25,
             chars: Phaser.GameObjects.RetroFont.TEXT_SET6,
             charsPerRow: 10,
-            spacing: { x: 1, y: 1 }
+            spacing: {x: 1, y: 1}
         };
         this.cache.bitmapFont.add('knighthawks', Phaser.GameObjects.RetroFont.Parse(this, config));
 

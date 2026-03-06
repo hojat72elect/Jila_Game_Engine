@@ -1,7 +1,6 @@
-import { GameObjects, Math } from "phaser";
+import {GameObjects, Math} from "phaser";
 
-export class Bullet extends GameObjects.Image
-{
+export class Bullet extends GameObjects.Image {
     speed;
     flame;
     end_direction = new Math.Vector2(0, 0);
@@ -14,8 +13,7 @@ export class Bullet extends GameObjects.Image
         this.name = "bullet";
     }
 
-    fire (x, y, targetX = 1, targetY = 0, bullet_texture = "bullet")
-    {
+    fire(x, y, targetX = 1, targetY = 0, bullet_texture = "bullet") {
         // Change bullet change texture
         this.setTexture(bullet_texture);
 
@@ -27,25 +25,24 @@ export class Bullet extends GameObjects.Image
         if (targetX === 1 && targetY === 0) {
             this.end_direction.setTo(1, 0);
         } else {
-            this.end_direction.setTo(targetX - x, targetY - y).normalize();            
+            this.end_direction.setTo(targetX - x, targetY - y).normalize();
         }
     }
 
-    destroyBullet ()
-    {
+    destroyBullet() {
         if (this.flame === undefined) {
             // Create particles for flame
             this.flame = this.scene.add.particles(this.x, this.y, 'flares',
                 {
                     lifespan: 250,
-                    scale: { start: 1.5, end: 0, ease: 'sine.out' },
+                    scale: {start: 1.5, end: 0, ease: 'sine.out'},
                     speed: 200,
                     advance: 500,
                     frequency: 20,
                     blendMode: 'ADD',
                     duration: 100,
                 });
-                this.flame.setDepth(1);
+            this.flame.setDepth(1);
             // When particles are complete, destroy them
             this.flame.once("complete", () => {
                 this.flame.destroy();
@@ -60,8 +57,7 @@ export class Bullet extends GameObjects.Image
     }
 
     // Update bullet position and destroy if it goes off screen
-    update (time, delta)
-    {
+    update(time, delta) {
         this.x += this.end_direction.x * this.speed * delta;
         this.y += this.end_direction.y * this.speed * delta;
 

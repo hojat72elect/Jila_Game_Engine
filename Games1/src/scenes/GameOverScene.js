@@ -1,7 +1,8 @@
-import { Scene } from "phaser";
+import {Scene} from "phaser";
 
 export class GameOverScene extends Scene {
     end_points = 0;
+
     constructor() {
         super("GameOverScene");
     }
@@ -70,7 +71,7 @@ export class GameOverScene extends Scene {
                     this.scene.start("MainScene");
                 });
             }
-        
+
         })
     }
 }

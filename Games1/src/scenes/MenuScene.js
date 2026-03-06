@@ -1,4 +1,4 @@
-import { Scene } from "phaser";
+import {Scene} from "phaser";
 
 export class MenuScene extends Scene {
     constructor() {
@@ -46,7 +46,7 @@ export class MenuScene extends Scene {
             "CLICK TO START",
             24
         ).setOrigin(0.5, 0.5);
-        
+
 
         // Tween to blink the text
         this.tweens.add({

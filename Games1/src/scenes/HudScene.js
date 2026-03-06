@@ -1,8 +1,8 @@
-import { Scene } from "phaser";
+import {Scene} from "phaser";
 
 // The HUD scene is the scene that shows the points and the remaining time.
 export class HudScene extends Scene {
-    
+
     remaining_time = 0;
 
     remaining_time_text;
