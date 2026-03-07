@@ -1,20 +1,20 @@
-import {GameObjects, Math} from "phaser";
+import {GameObjects, Math, type Scene} from "phaser";
 
 export class Bullet extends GameObjects.Image {
-    speed;
-    flame;
-    end_direction = new Math.Vector2(0, 0);
+    speed!: number;
+    flame!: Phaser.GameObjects.Particles.ParticleEmitter;
+    end_direction: Phaser.Math.Vector2 = new Math.Vector2(0, 0);
 
-    constructor(scene, x, y) {
+    constructor(scene: Scene, x: number, y: number) {
         super(scene, x, y, "bullet");
         this.speed = Phaser.Math.GetSpeed(450, 1);
         this.postFX.addBloom(0xffffff, 1, 1, 2, 1.2);
-        // Default bullet (player bullet)
+        // Default bullet (player's bullet)
 
         this.name = "bullet";
     }
 
-    fire(x, y, targetX = 1, targetY = 0, bullet_texture = "bullet") {
+    fire(x: number, y: number, targetX = 1, targetY = 0, bullet_texture = "bullet") {
         // Change bullet change texture
         this.setTexture(bullet_texture);
 
@@ -57,12 +57,12 @@ export class Bullet extends GameObjects.Image {
 
     }
 
-    // Update bullet position and destroy if it goes off screen
+    // Update bullet position and destroy if it goes off-screen.
     update(time, delta) {
         this.x += this.end_direction.x * this.speed * delta;
         this.y += this.end_direction.y * this.speed * delta;
 
-        // Verifica si la bala ha salido de la pantalla
+        // Check if the bullet has left the screen
         if (this.x > this.scene.sys.canvas.width || this.x < 0 || this.y > this.scene.sys.canvas.height || this.y < 0) {
             this.setActive(false);
             this.setVisible(false);

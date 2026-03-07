@@ -29,7 +29,7 @@ export class BlueEnemy extends Physics.Arcade.Sprite {
         });
         this.up_down_tween.pause();
 
-        // Bullets group
+        // Bullets group (these are the enemy bullets)
         this.bullets = this.scene.physics.add.group({
             classType: Bullet,
             maxSize: 100,
@@ -52,7 +52,7 @@ export class BlueEnemy extends Physics.Arcade.Sprite {
     }
 
     damage(player_x: number, player_y: number) {
-        const bullet = this.bullets.get();
+        const bullet: Bullet = this.bullets.get();
         if (bullet) {
             bullet.fire(this.x, this.y, player_x, player_y, "enemy-bullet");
         }
