@@ -1,13 +1,13 @@
-import {Physics} from "phaser";
-import {Bullet} from "./Bullet";
+import {Physics, type Scene} from "phaser";
+import {Bullet} from "./Bullet.js";
 
 export class Player extends Physics.Arcade.Image {
 
     // Player states: waiting, start, can_move
     state = "waiting";
-    propulsion_fire = null;
-    scene = null;
-    bullets = null;
+    propulsion_fire!: Phaser.GameObjects.Sprite;
+    scene!: Scene;
+    bullets!: Phaser.Physics.Arcade.Group;
 
     constructor({scene}) {
         super(scene, -190, 100, "player");
@@ -28,7 +28,7 @@ export class Player extends Physics.Arcade.Image {
 
     start() {
         this.state = "start";
-        const propulsion_fires_trail = [];
+        const propulsion_fires_trail: Phaser.GameObjects.Sprite[] = [];
 
         // Effect to move the player from left to right
         this.scene.tweens.add({
@@ -67,7 +67,7 @@ export class Player extends Physics.Arcade.Image {
         });
     }
 
-    move(direction) {
+    move(direction: "up" | "down") {
         if (this.state === "can_move") {
             if (direction === "up" && this.y - 10 > 0) {
                 this.y -= 5;
