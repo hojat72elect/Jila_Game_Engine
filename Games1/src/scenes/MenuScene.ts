@@ -33,7 +33,7 @@ export class MenuScene extends Scene {
             this.scale.height / 2,
             "knighthawks",
             "PHASER'S\nREVENGE",
-            52,
+            48,
             1
         )
         logo_game.setOrigin(0.5, 0.5);
@@ -53,7 +53,7 @@ export class MenuScene extends Scene {
             targets: start_msg,
             alpha: 0,
             duration: 800,
-            ease: (value) => Math.abs(Math.round(value)),
+            ease: (value: number) => Math.abs(Math.round(value)),
             yoyo: true,
             repeat: -1
         });
