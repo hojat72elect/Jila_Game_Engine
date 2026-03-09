@@ -1,13 +1,32 @@
+import {Scene} from 'phaser';
+
+interface CreateCardParams {
+    scene: Scene;
+    x: number;
+    y: number;
+    frontTexture: string;
+    cardName: string;
+}
+
+interface CardObject {
+    gameObject: Phaser.GameObjects.GameObject;
+    flip: (callbackComplete?: () => void) => void;
+    destroy: () => void;
+    cardName: string;
+}
+
 /**
  * Create a card game object
  */
-export const createCard = ({
-                               scene,
-                               x,
-                               y,
-                               frontTexture,
-                               cardName
-                           }) => {
+export const createCard = (
+    {
+        scene,
+        x,
+        y,
+        frontTexture,
+        cardName
+    }: CreateCardParams
+): CardObject => {
 
     let isFlipping = false;
     const rotation = {y: 0};
@@ -19,9 +38,9 @@ export const createCard = ({
         .setInteractive();
 
     // start with the card face down
-    card.modelRotationY = 180;
+    (card as any).modelRotationY = 180;
 
-    const flipCard = (callbackComplete) => {
+    const flipCard = (callbackComplete?: () => void) => {
         if (isFlipping) {
             return;
         }
@@ -50,8 +69,8 @@ export const createCard = ({
             },
             onUpdate: () => {
                 // card.modelRotation.y = Phaser.Math.DegToRad(180) + Phaser.Math.DegToRad(rotation.y);
-                card.rotateY = 180 + rotation.y;
-                const cardRotation = Math.floor(card.rotateY) % 360;
+                (card as any).rotateY = 180 + rotation.y;
+                const cardRotation = Math.floor((card as any).rotateY) % 360;
                 if ((cardRotation >= 0 && cardRotation <= 90) || (cardRotation >= 270 && cardRotation <= 359)) {
                     card.setTexture(frontTexture);
                 } else {
