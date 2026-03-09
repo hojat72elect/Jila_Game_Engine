@@ -1,5 +1,5 @@
-import { Preloader } from './Preloader';
-import { Play } from './Play';
+import {Preloader} from './Preloader';
+import {Play} from './Play';
 import Phaser from 'phaser';
 
 const config = {

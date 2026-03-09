@@ -2,15 +2,15 @@
  * Create a card game object
  */
 export const createCard = ({
-    scene,
-    x,
-    y,
-    frontTexture,
-    cardName
-}) => {
+                               scene,
+                               x,
+                               y,
+                               frontTexture,
+                               cardName
+                           }) => {
 
     let isFlipping = false;
-    const rotation = { y: 0 };
+    const rotation = {y: 0};
 
     const backTexture = "card-back";
 
@@ -54,8 +54,7 @@ export const createCard = ({
                 const cardRotation = Math.floor(card.rotateY) % 360;
                 if ((cardRotation >= 0 && cardRotation <= 90) || (cardRotation >= 270 && cardRotation <= 359)) {
                     card.setTexture(frontTexture);
-                }
-                else {
+                } else {
                     card.setTexture(backTexture);
                 }
             },
