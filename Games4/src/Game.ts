@@ -3,15 +3,19 @@ import Player from './Player.js';
 import Pickups from './Pickups.js';
 
 export default class MainGame extends Phaser.Scene {
+
+    score = 0;
+    newHighscore = false;
+    highscore = 0;
+    player!: Player;
+    germs!: Germs;
+    pickups!: Pickups;
+    scoreText!: Phaser.GameObjects.BitmapText;
+    introText!: Phaser.GameObjects.BitmapText;
+
     constructor() {
         super('MainGame');
 
-        this.player;
-        this.germs;
-        this.pickups;
-
-        this.introText;
-        this.scoreText;
         this.score = 0;
         this.highscore = 0;
         this.newHighscore = false;
@@ -55,14 +59,14 @@ export default class MainGame extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.germs, (player, germ) => this.playerHitGerm(player, germ));
     }
 
-    playerHitGerm(player, germ) {
+    playerHitGerm(player: any, germ: any) {
         //  We don't count a hit if the germ is fading in or out
         if (player.isAlive && germ.alpha === 1) {
             this.gameOver();
         }
     }
 
-    playerHitPickup(player, pickup) {
+    playerHitPickup(_: any, pickup: any) {
         this.score++;
 
         this.scoreText.setText('Score   ' + this.score);
@@ -107,7 +111,7 @@ export default class MainGame extends Phaser.Scene {
         });
     }
 
-    getPlayer(target) {
+    getPlayer(target: any) {
         target.x = this.player.x;
         target.y = this.player.y;
 
