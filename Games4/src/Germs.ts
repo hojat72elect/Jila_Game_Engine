@@ -1,7 +1,13 @@
+import Phaser from "phaser";
+//@ts-ignore
 import Germ from './Germ.js';
 
 export default class Germs extends Phaser.Physics.Arcade.Group {
-    constructor(world, scene) {
+
+    germConfig!: any[];
+    timedEvent!: Phaser.Time.TimerEvent;
+
+    constructor(world: any, scene: any) {
         super(world, scene);
 
         this.classType = Germ;
@@ -27,13 +33,18 @@ export default class Germs extends Phaser.Physics.Arcade.Group {
         germ2.start(2000);
         germ3.start();
 
-        this.timedEvent = this.scene.time.addEvent({delay: 2000, callback: this.releaseGerm, callbackScope: this, loop: true});
+        this.timedEvent = this.scene.time.addEvent({
+            delay: 2000,
+            callback: this.releaseGerm,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     stop() {
         this.timedEvent.remove();
 
-        this.getChildren().forEach((child) => {
+        this.getChildren().forEach((child: any) => {
 
             child.stop();
 
@@ -48,7 +59,7 @@ export default class Germs extends Phaser.Physics.Arcade.Group {
 
         let config = Phaser.Math.RND.pick(this.germConfig);
 
-        this.getChildren().forEach((child) => {
+        this.getChildren().forEach((child: any) => {
 
             if (child.anims.getName() === config.animation && !child.active) {
                 //  We found a dead matching germ, so resurrect it
@@ -58,7 +69,7 @@ export default class Germs extends Phaser.Physics.Arcade.Group {
         });
 
         if (germ) {
-            germ.restart(x, y);
+            (germ as any).restart(x, y);
         } else {
             germ = new Germ(this.scene, x, y, config.animation, config.speed);
 
