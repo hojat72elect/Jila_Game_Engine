@@ -1,5 +1,10 @@
 export default class Player extends Phaser.Physics.Arcade.Image {
-    constructor(scene, x, y) {
+
+    isAlive = false;
+    speed = 280;
+    target!: Phaser.Math.Vector2;
+
+    constructor(scene: any, x: any, y: any) {
         super(scene, x, y, 'assets', 'player');
 
         scene.add.existing(this);
@@ -17,7 +22,7 @@ export default class Player extends Phaser.Physics.Arcade.Image {
     start() {
         this.isAlive = true;
 
-        this.scene.input.on('pointermove', (pointer) => {
+        this.scene.input.on('pointermove', (pointer: any) => {
             if (this.isAlive) {
                 this.target.x = pointer.x;
                 this.target.y = pointer.y;
@@ -31,13 +36,13 @@ export default class Player extends Phaser.Physics.Arcade.Image {
     kill() {
         this.isAlive = false;
 
-        this.body.stop();
+        this.body!.stop();
     }
 
     preUpdate() {
-        if (this.body.speed > 0 && this.isAlive) {
+        if ((this.body as any).speed > 0 && this.isAlive) {
             if (Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y) < 6) {
-                this.body.reset(this.target.x, this.target.y);
+                this.body!.reset(this.target.x, this.target.y);
             }
         }
     }
