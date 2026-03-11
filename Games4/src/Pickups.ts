@@ -1,5 +1,9 @@
 export default class Pickups extends Phaser.Physics.Arcade.Group {
-    constructor(world, scene) {
+
+    outer!: Phaser.Geom.Rectangle;
+    target!: Phaser.Geom.Point;
+
+    constructor(world: any, scene: any) {
         super(world, scene);
 
         this.outer = new Phaser.Geom.Rectangle(64, 64, 672, 472);
@@ -14,11 +18,10 @@ export default class Pickups extends Phaser.Physics.Arcade.Group {
         this.create(500, 500, 'assets', 'ring');
     }
 
-    collect(pickup) {
+    collect(pickup: any) {
         //  Move the pick-up to a new location
 
         this.outer.getRandomPoint(this.target);
-
         pickup.body.reset(this.target.x, this.target.y);
     }
 }
