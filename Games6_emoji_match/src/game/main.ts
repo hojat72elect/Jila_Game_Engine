@@ -1,22 +1,22 @@
-import { WEBGL, Game, Scale,Types } from 'phaser';
-import {Breakout} from "./scenes/breakout.js";
+import { AUTO, Game, Scale,Types } from 'phaser';
+import Boot from "./scenes/Boot";
+import Preloader from "./scenes/Preloader";
+import MainMenu from "./scenes/MainMenu";
+import MainGame from "./scenes/Game";
 
 const config: Types.Core.GameConfig = {
-    type: WEBGL,
+    type: AUTO,
     width: 800,
     height: 600,
     parent: 'game-container',
-    backgroundColor: '#028af8',
+    backgroundColor: '#008eb0',
     scale: {
         mode: Scale.FIT,
         autoCenter: Scale.CENTER_BOTH
     },
     scene: [
-        Breakout
-    ],
-    physics:{
-        default: 'arcade'
-    }
+        Boot, Preloader, MainMenu, MainGame
+    ]
 };
 
 const StartGame = (parent: string) => {

@@ -1,7 +1,5 @@
-export default class MainGame extends Phaser.Scene
-{
-    constructor ()
-    {
+export default class MainGame extends Phaser.Scene {
+    constructor() {
         super('MainGame');
 
         this.emojis;
@@ -23,8 +21,7 @@ export default class MainGame extends Phaser.Scene
         this.timerText;
     }
 
-    create ()
-    {
+    create() {
         this.add.image(400, 300, 'background');
 
         this.circle1 = this.add.circle(0, 0, 42).setStrokeStyle(3, 0xf8960e);
@@ -83,45 +80,38 @@ export default class MainGame extends Phaser.Scene
         this.arrangeGrid();
     }
 
-    start ()
-    {
+    start() {
         this.score = 0;
         this.matched = false;
 
-        this.timer = this.time.addEvent({ delay: 30000, callback: this.gameOver, callbackScope: this });
+        this.timer = this.time.addEvent({delay: 30000, callback: this.gameOver, callbackScope: this});
 
-        this.sound.play('countdown', { delay: 27 });
+        this.sound.play('countdown', {delay: 27});
     }
 
-    selectEmoji (pointer, emoji)
-    {
-        if (this.matched)
-        {
+    selectEmoji(pointer, emoji) {
+        if (this.matched) {
             return;
         }
 
         //  Is this the first or second selection?
-        if (!this.selectedEmoji)
-        {
+        if (!this.selectedEmoji) {
             //  Our first emoji
             this.circle1.setPosition(emoji.x, emoji.y);
             this.circle1.setVisible(true);
 
             this.selectedEmoji = emoji;
-        }
-        else if (emoji !== this.selectedEmoji)
-        {
+        } else if (emoji !== this.selectedEmoji) {
             //  Our second emoji
 
             //  Is it a match?
-            if (emoji.frame.name === this.selectedEmoji.frame.name)
-            {
+            if (emoji.frame.name === this.selectedEmoji.frame.name) {
                 this.circle1.setStrokeStyle(3, 0x00ff00);
                 this.circle2.setPosition(emoji.x, emoji.y);
                 this.circle2.setVisible(true);
 
                 this.tweens.add({
-                    targets: [ this.child1, this.child2 ],
+                    targets: [this.child1, this.child2],
                     scale: 1.4,
                     angle: '-=30',
                     yoyo: true,
@@ -130,11 +120,9 @@ export default class MainGame extends Phaser.Scene
                     completeDelay: 200,
                     onComplete: () => this.newRound()
                 });
-        
+
                 this.sound.play('match');
-            }
-            else
-            {
+            } else {
                 this.circle1.setPosition(emoji.x, emoji.y);
                 this.circle1.setVisible(true);
 
@@ -143,8 +131,7 @@ export default class MainGame extends Phaser.Scene
         }
     }
 
-    newRound ()
-    {
+    newRound() {
         this.matched = false;
 
         this.score++;
@@ -162,13 +149,12 @@ export default class MainGame extends Phaser.Scene
             scale: 0,
             ease: 'power2',
             duration: 600,
-            delay: this.tweens.stagger(100, { grid: [ 4, 4 ], from: 'center' }),
+            delay: this.tweens.stagger(100, {grid: [4, 4], from: 'center'}),
             onComplete: () => this.arrangeGrid()
         });
     }
 
-    arrangeGrid ()
-    {
+    arrangeGrid() {
         //  We need to make sure there is only one pair in the grid
         //  Let's create an array with all possible frames in it:
 
@@ -179,8 +165,7 @@ export default class MainGame extends Phaser.Scene
         //  Now we pick 16 random values, removing each one from the array so we can't pick it again
         //  and set those into the sprites
 
-        for (let i = 0; i < 16; i++)
-        {
+        for (let i = 0; i < 16; i++) {
             let frame = Phaser.Utils.Array.RemoveRandomElement(frames);
 
             children[i].setFrame('smile' + frame);
@@ -204,23 +189,18 @@ export default class MainGame extends Phaser.Scene
         //  Stagger tween them all in
         this.tweens.add({
             targets: children,
-            scale: { start: 0, from: 0, to: 1 },
+            scale: {start: 0, from: 0, to: 1},
             ease: 'bounce.out',
             duration: 600,
-            delay: this.tweens.stagger(100, { grid: [ 4, 4 ], from: 'center' })
+            delay: this.tweens.stagger(100, {grid: [4, 4], from: 'center'})
         });
     }
 
-    update ()
-    {
-        if (this.timer)
-        {
-            if (this.timer.getProgress() === 1)
-            {
+    update() {
+        if (this.timer) {
+            if (this.timer.getProgress() === 1) {
                 this.timerText.setText('00:00');
-            }
-            else
-            {
+            } else {
                 const remaining = (30 - this.timer.getElapsedSeconds()).toPrecision(4);
                 const pos = remaining.indexOf('.');
 
@@ -234,8 +214,7 @@ export default class MainGame extends Phaser.Scene
         }
     }
 
-    gameOver ()
-    {
+    gameOver() {
         //  Show them where the match actually was
         this.circle1.setStrokeStyle(4, 0xfc29a6).setPosition(this.child1.x, this.child1.y).setVisible(true);
         this.circle2.setStrokeStyle(4, 0xfc29a6).setPosition(this.child2.x, this.child2.y).setVisible(true);
@@ -244,15 +223,14 @@ export default class MainGame extends Phaser.Scene
 
         console.log(this.score, this.highscore);
 
-        if (this.score > this.highscore)
-        {
+        if (this.score > this.highscore) {
             console.log('high set');
 
             this.registry.set('highscore', this.score);
         }
 
         this.tweens.add({
-            targets: [ this.circle1, this.circle2 ],
+            targets: [this.circle1, this.circle2],
             alpha: 0,
             yoyo: true,
             repeat: 2,

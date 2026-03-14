@@ -1,19 +1,16 @@
-export default class MainMenu extends Phaser.Scene
-{
-    constructor ()
-    {
+export default class MainMenu extends Phaser.Scene {
+    constructor() {
         super('MainMenu');
 
         this.music;
     }
 
-    create ()
-    {
+    create() {
         let background = this.add.image(400, 300, 'background');
 
         this.tweens.add({
             targets: background,
-            alpha: { from: 0, to: 1 },
+            alpha: {from: 0, to: 1},
             duration: 1000
         });
 
@@ -36,9 +33,8 @@ export default class MainMenu extends Phaser.Scene
 
         let logo = this.add.image(400, -200, 'logo');
 
-        if (!this.music)
-        {
-            this.music = this.sound.play('music', { loop: true });
+        if (!this.music) {
+            this.music = this.sound.play('music', {loop: true});
         }
 
         this.tweens.add({
