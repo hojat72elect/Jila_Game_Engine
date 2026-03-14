@@ -41,8 +41,7 @@ export var Flood = new Phaser.Class({
         },
 
     preload: function () {
-        this.load.bitmapFont('atari', 'assets/fonts/bitmap/atari-smooth.png', 'assets/fonts/bitmap/atari-smooth.xml');
-        this.load.atlas('flood', 'assets/games/flood/blobs.png', 'assets/games/flood/blobs.json');
+        this.load.atlas('flood', 'assets/blobs.png', 'assets/blobs.json');
     },
 
     create: function () {
@@ -98,9 +97,9 @@ export var Flood = new Phaser.Class({
 
         this.createArrow();
 
-        this.text1 = this.add.bitmapText(684, 30, 'atari', 'Moves', 20).setAlpha(0);
-        this.text2 = this.add.bitmapText(694, 60, 'atari', '00', 40).setAlpha(0);
-        this.text3 = this.add.bitmapText(180, 200, 'atari', 'So close!\n\nClick to\ntry again', 48).setAlpha(0);
+        this.text1 = this.add.text(684, 30, 'Moves', { fontSize: '20px', fill: '#fff' }).setAlpha(0);
+        this.text2 = this.add.text(694, 60, '00', { fontSize: '40px', fill: '#fff' }).setAlpha(0);
+        this.text3 = this.add.text(180, 200, 'So close!\n\nClick to\ntry again', { fontSize: '48px', fill: '#fff', align: 'center' }).setAlpha(0);
 
         this.instructions = this.add.image(400, 300, 'flood', 'instructions').setAlpha(0);
 
