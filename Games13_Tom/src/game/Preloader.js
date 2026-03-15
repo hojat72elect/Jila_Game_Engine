@@ -4,7 +4,7 @@ export class Preloader extends Phaser.Scene {
     }
 
     preload() {
-        this.load.path = 'assets/games/tom/';
+        this.load.path = 'assets/';
 
         this.load.image([
             'background',
