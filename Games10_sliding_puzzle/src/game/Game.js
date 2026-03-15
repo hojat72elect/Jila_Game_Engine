@@ -22,8 +22,7 @@ const SlidingPuzzle = {
  * This web site has some creative tips on solving Sliding Puzzles:
  * http://www.nordinho.net/vbull/blogs/lunanik/6131-slider-puzzles-solved-once-all.html
  */
-
-export default class Game extends Phaser.Scene {
+export class PuzzleGame extends Phaser.Scene {
     constructor() {
         super('Game');
 

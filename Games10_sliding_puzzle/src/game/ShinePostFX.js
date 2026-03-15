@@ -1,8 +1,3 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2023 Photon Storm Ltd.
- */
-
 const fragShader = `
 #define SHADER_NAME SHINE_FS
 
@@ -43,7 +38,7 @@ void main ()
 }
 `;
 
-export default class ShinePostFX extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+export class ShinePostFX extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     constructor(game) {
         super({
             game,

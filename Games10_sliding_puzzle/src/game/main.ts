@@ -1,29 +1,24 @@
 import {AUTO, Game, Scale, Types} from 'phaser';
-import MainMenu from "./MainMenu";
-
-
+import {MainMenu} from "./MainMenu";
+import {ShinePostFX} from "./ShinePostFX";
+import {WipePostFX} from "./WipePostFX";
+import {Preloader} from "./Preloader";
+import {PuzzleGame} from "./Game";
 
 const config: Types.Core.GameConfig = {
     type: AUTO,
-    width: 800,
-    height: 600,
-    backgroundColor: 0x2d2d2d,
-    pixelArt: true,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {x: 0, y: 300},
-            debug: false
-        }
-    },
+    width: 1024,
+    height: 768,
+    backgroundColor: '#002157',
     parent: 'game-container',
     scale: {
         mode: Scale.FIT,
         autoCenter: Scale.CENTER_BOTH
     },
     scene: [
-        MainMenu
-    ]
+        Preloader, MainMenu, PuzzleGame
+    ],
+    pipeline: { ShinePostFX, WipePostFX }
 };
 
 const StartGame = (parent: string) => {

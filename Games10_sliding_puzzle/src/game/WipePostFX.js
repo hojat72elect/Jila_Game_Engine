@@ -1,8 +1,3 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2023 Photon Storm Ltd.
- */
-
 const fragShader = `
 #define SHADER_NAME WIPE_FS
 
@@ -50,7 +45,7 @@ void main ()
 }
 `;
 
-export default class WipePostFX extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+export class WipePostFX extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     constructor(game) {
         super({
             game,
