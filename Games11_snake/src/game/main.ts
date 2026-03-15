@@ -1,5 +1,5 @@
 import {Game, Scale, Types, WEBGL} from 'phaser';
-import {create, preload, update} from "./part7";
+import {create, preload, update} from "./part7.js";
 
 const config: Types.Core.GameConfig = {
     type: WEBGL,
