@@ -1,5 +1,6 @@
 import {AUTO, Game, Scale, Types} from 'phaser';
-import {Intro, MineSweeper} from "./minesweeper";
+import MainMenu from "./MainMenu";
+
 
 
 const config: Types.Core.GameConfig = {
@@ -21,7 +22,7 @@ const config: Types.Core.GameConfig = {
         autoCenter: Scale.CENTER_BOTH
     },
     scene: [
-        Intro, MineSweeper
+        MainMenu
     ]
 };
 
