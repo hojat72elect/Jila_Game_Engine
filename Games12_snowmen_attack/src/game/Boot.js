@@ -1,12 +1,9 @@
-export default class Boot extends Phaser.Scene
-{
-    constructor ()
-    {
+export class Boot extends Phaser.Scene {
+    constructor() {
         super('Boot');
     }
 
-    create ()
-    {
+    create() {
         this.registry.set('highscore', 0);
 
         this.scene.start('Preloader');

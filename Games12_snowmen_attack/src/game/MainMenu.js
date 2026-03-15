@@ -1,13 +1,10 @@
-export default class MainMenu extends Phaser.Scene
-{
-    constructor ()
-    {
+export class MainMenu extends Phaser.Scene {
+    constructor() {
         super('MainMenu');
     }
 
-    create ()
-    {
-        this.sound.play('music', { loop: true, delay: 2 });
+    create() {
+        this.sound.play('music', {loop: true, delay: 2});
 
         this.add.shader('snow', 512, 384, 1024, 768);
 

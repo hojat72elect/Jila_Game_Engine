@@ -1,10 +1,8 @@
 import Track from './Track.js';
 import Player from './Player.js';
 
-export default class MainGame extends Phaser.Scene
-{
-    constructor ()
-    {
+export class MainGame extends Phaser.Scene {
+    constructor() {
         super('MainGame');
 
         this.player;
@@ -19,8 +17,7 @@ export default class MainGame extends Phaser.Scene
         this.highscoreText;
     }
 
-    create ()
-    {
+    create() {
         this.score = 0;
         this.highscore = this.registry.get('highscore');
 
@@ -38,19 +35,18 @@ export default class MainGame extends Phaser.Scene
         this.add.image(0, 0, 'overlay').setOrigin(0);
 
         this.add.image(16, 0, 'sprites', 'panel-score').setOrigin(0);
-        this.add.image(1024-16, 0, 'sprites', 'panel-best').setOrigin(1, 0);
+        this.add.image(1024 - 16, 0, 'sprites', 'panel-best').setOrigin(1, 0);
 
         this.infoPanel = this.add.image(512, 384, 'sprites', 'controls');
-        this.scoreText = this.add.text(140, 2, this.score, { fontFamily: 'Arial', fontSize: 32, color: '#ffffff' });
-        this.highscoreText = this.add.text(820, 2, this.highscore, { fontFamily: 'Arial', fontSize: 32, color: '#ffffff' });
+        this.scoreText = this.add.text(140, 2, this.score, {fontFamily: 'Arial', fontSize: 32, color: '#ffffff'});
+        this.highscoreText = this.add.text(820, 2, this.highscore, {fontFamily: 'Arial', fontSize: 32, color: '#ffffff'});
 
         this.input.keyboard.once('keydown-SPACE', this.start, this);
         this.input.keyboard.once('keydown-UP', this.start, this);
         this.input.keyboard.once('keydown-DOWN', this.start, this);
     }
 
-    start ()
-    {
+    start() {
         this.input.keyboard.removeAllListeners();
 
         this.tweens.add({
@@ -68,14 +64,15 @@ export default class MainGame extends Phaser.Scene
         this.tracks[2].start(5000, 9000);
         this.tracks[3].start(6000, 10000);
 
-        this.scoreTimer = this.time.addEvent({ delay: 1000, callback: () => {
-            this.score++;
-            this.scoreText.setText(this.score);
-        }, callbackScope: this, repeat: -1 });
+        this.scoreTimer = this.time.addEvent({
+            delay: 1000, callback: () => {
+                this.score++;
+                this.scoreText.setText(this.score);
+            }, callbackScope: this, repeat: -1
+        });
     }
 
-    gameOver ()
-    {
+    gameOver() {
         this.infoPanel.setTexture('gameover');
 
         this.tweens.add({
@@ -97,8 +94,7 @@ export default class MainGame extends Phaser.Scene
 
         this.scoreTimer.destroy();
 
-        if (this.score > this.highscore)
-        {
+        if (this.score > this.highscore) {
             this.highscoreText.setText('NEW!');
 
             this.registry.set('highscore', this.score);

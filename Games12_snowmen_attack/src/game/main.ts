@@ -1,20 +1,23 @@
-import {Game, Scale, Types, WEBGL} from 'phaser';
-import {create, preload, update} from "./part7.js";
+import {Game, Scale, Types, AUTO} from 'phaser';
+import {Boot} from "./Boot";
+import {Preloader} from "./Preloader";
+import {MainMenu} from "./MainMenu";
+import {MainGame} from "./Game";
 
 const config: Types.Core.GameConfig = {
-    type: WEBGL,
-    width: 640,
-    height: 480,
-    backgroundColor: '#bfcc00',
+    type: AUTO,
+    width: 1024,
+    height: 768,
+    backgroundColor: '#3366b2',
     parent: 'game-container',
     scale: {
         mode: Scale.FIT,
         autoCenter: Scale.CENTER_BOTH
     },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
+    scene: [ Boot, Preloader, MainMenu, MainGame ],
+    physics:{
+        default: 'arcade',
+        arcade: { debug: false }
     }
 };
 
