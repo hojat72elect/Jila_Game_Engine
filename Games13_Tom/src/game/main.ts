@@ -1,23 +1,23 @@
-import {Game, Scale, Types, AUTO} from 'phaser';
-import {Boot} from "./Boot";
+import {AUTO, Game, Scale, Types} from 'phaser';
 import {Preloader} from "./Preloader";
-import {MainMenu} from "./MainMenu";
-import {MainGame} from "./Game";
+import {UI} from "./UI";
+import {Play} from "./Play";
+import {Menu} from "./Menu";
 
 const config: Types.Core.GameConfig = {
     type: AUTO,
-    width: 1024,
-    height: 768,
-    backgroundColor: '#3366b2',
+    width: 640,
+    height: 360,
+    pixelArt: true,
     parent: 'game-container',
     scale: {
         mode: Scale.FIT,
         autoCenter: Scale.CENTER_BOTH
     },
-    scene: [ Boot, Preloader, MainMenu, MainGame ],
-    physics:{
+    scene: [Preloader, UI, Play, Menu],
+    physics: {
         default: 'arcade',
-        arcade: { debug: false }
+        arcade: {gravity: {x : 0, y : 2_000}}
     }
 };
 

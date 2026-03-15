@@ -1,18 +1,14 @@
-class UI extends Phaser.Scene
-{
-    constructor ()
-    {
+export class UI extends Phaser.Scene {
+    constructor() {
         super({key: 'UI'});
     }
 
-    init ()
-    {
+    init() {
         this.scene.moveUp();
         this.actual_points = 0;
     }
 
-    create ()
-    {
+    create() {
         this.groupLife = this.add.group({
             key: 'life',
             repeat: 2,
@@ -47,4 +43,3 @@ class UI extends Phaser.Scene
     }
 }
 
-export default UI;
